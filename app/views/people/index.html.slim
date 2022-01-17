@@ -1,0 +1,21 @@
+h2 Viewing people
+
+table.table
+  thead
+    tr
+      th[scope="col"] ID
+      th[scope="col"] Name
+      th[scope="col"] Phone number
+      th[scope="col"] Email address
+      th[scope="col"] Company
+  tbody
+    - @people.each do |person|
+      tr
+        th[scope="row"]= person&.id
+        td= person.try(:name)
+        td= person.try(:phone)
+        td= person.try(:email)
+        td= person.try(:company).try(:name)
+
+
+
