@@ -6,7 +6,7 @@ This application has a few issues and features.  Please solve the required fix, 
 Please make your solutions to this application as if you're doing your every day work.  Shoot for 100% coverage (Will require fixing PersonController)
 
 ### Required fix
-1. As a front-end user, when creating a new Person entry, I want the value I enter into the email field to be saved to my new entry. (See failing specs)
+1. As a front-end user, when creating a new Person entry, I want the value I enter into the phone number field to be saved to my new entry. (See failing specs)
 
 ### Performance Issues
 2. Too many queries to the database, load Companies along with People.
