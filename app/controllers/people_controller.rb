@@ -22,7 +22,7 @@ class PeopleController < ApplicationController
   end
 
   def search_by_name
-    result = Person.where("UPPER(name) like ?", "%" + Person.sanitize_sql_like(params['name']) + "%").paginate(page: params[:page], per_page: params[:per_page])
+    result = Person.where("UPPER(name) like ?", "%" + Person.sanitize_sql_like(params['name'].upcase) + "%").paginate(page: params[:page], per_page: params[:per_page])
     render :json => result.to_json
   end
 
