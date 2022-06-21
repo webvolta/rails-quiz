@@ -1,6 +1,4 @@
-class CompanyController < ApplicationController
-    protect_from_forgery with: :null_session
-    
+class CompanyController < ApplicationController  
     def create_multiple
         names = params["companies"]
         result = []
