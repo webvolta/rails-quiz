@@ -17,12 +17,12 @@ class PeopleController < ApplicationController
   end
 
   def search_by_email
-    result = Person.where("email = '#{params['email']}'").limit(params['per_page']).offset((params['page'] - 1) * params['per_page'])
+    result = Person.where(email: params['email']).paginate(page: params[:page], per_page: params[:per_page])
     render :json => result.to_json
   end
 
   def search_by_name
-    result = Person.where("UPPER(name) like '%#{params['name'].upcase}%'").limit(params['per_page']).offset((params['page'] - 1) * params['per_page'])
+    result = Person.where("UPPER(name) like ?", "%" + Person.sanitize_sql_like(params['name']) + "%").paginate(page: params[:page], per_page: params[:per_page])
     render :json => result.to_json
   end
 
