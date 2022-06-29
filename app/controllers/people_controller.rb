@@ -9,17 +9,21 @@ class PeopleController < ApplicationController
   end
 
   def create
-    if Person.create(person_attributes)
+    if Person.create({
+      name: person_attributes[:name], 
+      phone_number: person_attributes[:phone_number], 
+      email: person_attributes[:email], 
+      company: Company.create(name: person_attributes[:company])})
       redirect_to people_path, notice: 'Successfully created entry'
-    else
-      render :create, alert: 'Unsuccessfully created entry'
+    else 
+      render :new, alert: 'Unsuccessfully created entry'
     end
   end
 
   private
 
   def person_attributes
-    params.require(:person).permit(:name, :email, :phone)
+    params.require(:person).permit(:name, :email, :phone_number, :company)
   end
 
 end
