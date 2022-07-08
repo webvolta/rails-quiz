@@ -15,12 +15,29 @@ RSpec.describe PeopleController, type: :controller do
   end
 
   describe 'POST create' do
-    it 'Creates a record' do
-      expect{ post :create, params: { person: { name: 'foo', phone_number: '123', email: 'foo' } } }.to change{ Person.count }.by(1)
-    end
+    let(:base_params) do
+      {
+      person: {
+        name: 'foo',
+        email: 'foo',
+        phone_number: '123'
+        
+      }
+    }
+    end 
 
-    it 'has status found' do
-      expect(post :create, params: { person: { name: 'foo', phone_number: '123', email: 'foo' } }).to have_http_status(:found)
+    context 'with valid params' do
+
+      it 'creates a new record' do
+        expect{ post :create, params: base_params}.to change{ Person.count }.by(1)
+      end
     end
+    
+    it 'has status found' do
+      expect(post :create, params: base_params).to have_http_status(:found)
+    end
+    # it 'has status found' do
+      # expect(post :create, params: { person: { name: 'foo', phone_number: '123', email: 'foo' } }).to have_http_status(:found)
+    # end
   end
 end
