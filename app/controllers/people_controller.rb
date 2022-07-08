@@ -18,6 +18,15 @@ class PeopleController < ApplicationController
     end
   end
 
+  def search
+    @people = Person.where(email: params[:email]).page(params[:page]).per(params[:per_page]) if params[:email].present?
+    render json: {
+      data: @people,
+      meta: { page: @people.current_page,
+              per: params[:per_page] || 10 }
+    }
+  end
+
   private
 
   def person_attributes
