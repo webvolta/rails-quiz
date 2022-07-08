@@ -1,5 +1,6 @@
-Rails.application.routes.draw do
+# frozen_string_literal: true
 
-  resources :people, only: [:index, :new, :create]
+Rails.application.routes.draw do
+  resources :people, only: %i[index new create]
   root to: 'people#index'
 end

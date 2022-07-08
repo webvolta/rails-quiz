@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: people
@@ -12,6 +14,5 @@
 #
 
 class Person < ApplicationRecord
-  
   belongs_to :company, optional: true
 end

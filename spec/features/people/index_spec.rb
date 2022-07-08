@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe 'Listing people', type: :feature do
-  before do 
+  before do
     Person.create(
       name: 'Foo Bar',
       phone_number: 'Biz',
@@ -23,5 +25,4 @@ RSpec.describe 'Listing people', type: :feature do
 
     expect(page).to have_field :person_name
   end
-
 end

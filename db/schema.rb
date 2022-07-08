@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -10,23 +12,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_01_17_214728) do
-
-  create_table "companies", force: :cascade do |t|
-    t.string "name"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+ActiveRecord::Schema.define(version: 20_220_117_214_728) do
+  create_table 'companies', force: :cascade do |t|
+    t.string 'name'
+    t.datetime 'created_at', precision: 6, null: false
+    t.datetime 'updated_at', precision: 6, null: false
   end
 
-  create_table "people", force: :cascade do |t|
-    t.string "name", null: false
-    t.string "phone_number", null: false
-    t.string "email", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.integer "company_id"
-    t.index ["company_id"], name: "index_people_on_company_id"
+  create_table 'people', force: :cascade do |t|
+    t.string 'name', null: false
+    t.string 'phone_number', null: false
+    t.string 'email', null: false
+    t.datetime 'created_at', precision: 6, null: false
+    t.datetime 'updated_at', precision: 6, null: false
+    t.integer 'company_id'
+    t.index ['company_id'], name: 'index_people_on_company_id'
   end
 
-  add_foreign_key "people", "companies"
+  add_foreign_key 'people', 'companies'
 end

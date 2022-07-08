@@ -1,5 +1,6 @@
-class PeopleController < ApplicationController
+# frozen_string_literal: true
 
+class PeopleController < ApplicationController
   def index
     @people = Person.all
   end
@@ -22,6 +23,4 @@ class PeopleController < ApplicationController
   def person_attributes
     params.require(:person).permit(:name, :email, :phone_number)
   end
-
 end
-

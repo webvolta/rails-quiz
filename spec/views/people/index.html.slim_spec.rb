@@ -1,5 +1,7 @@
-require "rails_helper"
+# frozen_string_literal: true
 
-describe "people/index.html.slim" do
-  it "Displays the users"
+require 'rails_helper'
+
+describe 'people/index.html.slim' do
+  it 'Displays the users'
 end
