@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# Class that takes care of creating people
 class PeopleController < ApplicationController
   def index
     @people = Person.page params[:page]
@@ -19,7 +20,7 @@ class PeopleController < ApplicationController
   end
 
   def search
-    @people = Person.where(email: params[:email]).page(params[:page]).per(params[:per_page]) if params[:email].present?
+    @people = Person.where('email LIKE?', "%#{params[:email]}%").page(params[:page]).per(params[:per_page]) if params[:email].present?
     render json: {
       data: @people,
       meta: { page: @people.current_page,
