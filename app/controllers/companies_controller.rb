@@ -1,4 +1,9 @@
+# frozen_string_literal: true
+
+# Class that handles the creation companies
 class CompaniesController < ApplicationController
+  http_basic_authenticate_with name: 'dhh', password: 'secret', only: :create_multiple_companies
+
   def index
     @companies = Company.page params[:page]
   end
@@ -16,6 +21,19 @@ class CompaniesController < ApplicationController
     end
   end
 
+  def create_multiple_companies
+    if @companies = Company.create(multiple_company_attributes[:companies])
+
+      render json: {
+        data: @companies
+      }, status: :created
+    else
+      render json: {
+        errors: @companies.errors.full_messages
+      }, status: :unprocessable_entity
+    end
+  end
+
   def search_company
     @companies = Company.where('name LIKE ?', "%#{params[:name]}%").page(params[:page]).per(params[:per_page]) if params[:name].present?
     render json: {
@@ -28,6 +46,10 @@ class CompaniesController < ApplicationController
   private
 
   def company_attributes
-    params.require(:company).permit(:name)
+    params.require(:companies).permit(:name)
+  end
+
+  def multiple_company_attributes
+    params.permit(companies: [:name])
   end
 end
