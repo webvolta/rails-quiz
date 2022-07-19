@@ -20,7 +20,13 @@ class PeopleController < ApplicationController
   end
 
   def search
-    @people = Person.where('email LIKE?', "%#{params[:email]}%").page(params[:page]).per(params[:per_page]) if params[:email].present?
+    # @people = Person.where('email LIKE?', "%#{params[:email]}%").page(params[:page]).per(params[:per_page]) if params[:email].present?
+    if (params[:phone_number].present?
+        @people = Person.where('phone_number LIKE?',
+                               "%#{params[:phone_number]}%").page(params[:page]).per(params[:per_page])) ||
+       @people = Person.where('name LIKE?', "%#{params[:name]}%").page(params[:page]).per(params[:per_page]) ||
+                 @people = Person.where('email LIKE?', "%#{params[:email]}%").page(params[:page]).per(params[:per_page])
+    end
     render json: {
       data: @people,
       meta: { page: @people.current_page,

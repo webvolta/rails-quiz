@@ -15,6 +15,13 @@ RSpec.describe 'Search for a person', type: :request do
       it 'returns status code 200' do
         expect(response).to have_http_status(200)
       end
+
+      it 'returns the item that matches the name' do
+        get '/search_person/?name=john'
+        res = JSON.parse(response.body)
+        expect(res['data'].count).to eq(2)
+        expect(res['data'][0]['name'].capitalize).to eq(@person1.name)
+      end
     end
   end
 end
