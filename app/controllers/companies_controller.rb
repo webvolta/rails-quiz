@@ -23,7 +23,6 @@ class CompaniesController < ApplicationController
 
   def create_multiple_companies
     if @companies = Company.create(multiple_company_attributes[:companies])
-
       render json: {
         data: @companies
       }, status: :created
@@ -36,6 +35,8 @@ class CompaniesController < ApplicationController
 
   def search_company
     @companies = Company.where('name LIKE ?', "%#{params[:name]}%").page(params[:page]).per(params[:per_page]) if params[:name].present?
+    return render json: {}, status: 404 if @companies.empty?
+
     render json: {
       data: @companies,
       meta: { page: @companies.current_page,
