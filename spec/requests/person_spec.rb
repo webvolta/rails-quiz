@@ -17,10 +17,10 @@ RSpec.describe 'Search for a person', type: :request do
       end
 
       it 'returns the item that matches the name' do
-        get '/search_person/?name=john'
+        get '/search_person/?name=joh'
         res = JSON.parse(response.body)
-        expect(res['data'].count).to eq(2)
-        expect(res['data'][0]['name'].capitalize).to eq(@person1.name)
+        expect(res['data'].count).to eq(1)
+        expect(res['data'][0]['name']).to eq(@person1.name)
       end
     end
   end
