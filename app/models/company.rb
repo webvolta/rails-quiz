@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: companies
@@ -10,4 +12,5 @@
 
 class Company < ApplicationRecord
   has_many :people
+  validates :name, presence: true
 end
