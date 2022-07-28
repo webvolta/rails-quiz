@@ -11,6 +11,8 @@
 class Company < ApplicationRecord
   has_many :people
 
+  validates :name, presence: true
+
   def self.search_by_name(name)
     self.where('name LIKE ?', '%' + self.sanitize_sql_like(name) + '%')
   end

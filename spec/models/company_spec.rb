@@ -13,6 +13,11 @@ require 'rails_helper'
 RSpec.describe Company, type: :model do
   it { is_expected.to have_many :people }
 
+  it 'validates name presence' do
+    company = Company.create(name: nil)
+    expect(company.valid?).to be(false)
+  end
+
   describe '.search_by_name' do
     let!(:company) { create(:company, name: 'Acme, Inc') }
 
