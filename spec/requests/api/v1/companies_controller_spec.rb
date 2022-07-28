@@ -1,11 +1,11 @@
 require 'rails_helper'
 
 RSpec.describe Api::V1::CompaniesController do
-  after(:each) do
-    expect(response.content_type).to eq('application/json; charset=utf-8')
-  end
-
   describe 'GET /api/v1/companies' do
+    after(:each) do
+      expect(response.content_type).to eq('application/json; charset=utf-8')
+    end
+
     context 'no query params' do
       let!(:companies) { create_list(:company, 20) }
 
@@ -33,7 +33,13 @@ RSpec.describe Api::V1::CompaniesController do
   end
 
   describe 'POST /api/v1/companies' do
-    let(:headers) { { 'ACCEPT': 'application/json' } }
+    let(:headers) do
+      {
+        'ACCEPT': 'application/json',
+        'HTTP_AUTHORIZATION': ActionController::HttpAuthentication::Basic
+                                .encode_credentials('test', 'secret')
+      }
+    end
 
     context 'create single company' do
       let(:payload) { { company: { name: 'test1' } } }
@@ -86,6 +92,15 @@ RSpec.describe Api::V1::CompaniesController do
         body = JSON.parse(response.body)
         expect(response).to have_http_status(:unprocessable_entity)
         expect(body[0]).to eq(['Name can\'t be blank'])
+      end
+    end
+
+    context 'invalid http auth' do
+      let(:headers) { { 'ACCEPT': 'application/json' } }
+
+      it 'returns http auth error' do
+        post '/api/v1/companies', params: {}, headers: headers
+        expect(response).to have_http_status(:unauthorized)
       end
     end
   end

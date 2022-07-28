@@ -1,6 +1,12 @@
 module Api
   module V1
     class CompaniesController < ApplicationController
+      protect_from_forgery with: :null_session
+
+      http_basic_authenticate_with \
+        name: Rails.application.secrets.api_http_auth[:username],
+        password: Rails.application.secrets.api_http_auth[:password],
+        only: :create
 
       def index
         if params[:name]
