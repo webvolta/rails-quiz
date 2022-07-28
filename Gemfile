@@ -26,7 +26,6 @@ end
 group :development do
   gem "web-console"
   gem "annotate"
-  gem "faker"
 end
 
 group :test do
@@ -38,6 +37,7 @@ group :test do
   gem "rspec-its"
   gem "shoulda"
   gem "simplecov", require: false
+  gem "faker"
 end
 
 # Use Redis for Action Cable

@@ -1,55 +1,35 @@
 require 'rails_helper'
 
 RSpec.describe Api::V1::PeopleController do
-  let(:person_double) { class_double(Person) }
-  let(:ar_double) { double(ActiveRecord::Relation) }
-
   after(:each) do
     expect(response.content_type).to eq('application/json; charset=utf-8')
   end
 
-  context 'no query params (defaults)' do
-    before do
-      allow(Person).to receive(:page).and_return(ar_double)
+  context 'no query params' do
+    let!(:people) { create_list(:person, 20) }
 
-      allow(ar_double).to receive(:per)
-    end
-
-    it 'returns people with page and per as nil' do
+    it 'returns people with pagination defaults' do
       get '/api/v1/people'
 
+      body = JSON.parse(response.body)
       expect(response).to have_http_status(:ok)
-
-      expect(Person).to have_received(:page).with(nil)
-      expect(ar_double).to have_received(:per).with(nil)
+      expect(body.count).to eq(10)
     end
   end
 
-  context 'with email param' do
-    context 'with valid email' do
-      before do
-        allow(Person).to receive(:where).and_return(ar_double)
-
-        allow(ar_double).to receive(:page).and_return(ar_double)
-
-        allow(ar_double).to receive(:per)
-      end
-
-      it 'filters persons by email address' do
-        get '/api/v1/people', params: { email: 'test@example.com',
-                                        page: 4,
-                                        per: 15 }
-
-        expect(response).to have_http_status(:ok)
-
-        expect(Person).to have_received(:where).with(email: 'test@example.com')
-        expect(ar_double).to have_received(:page).with('4')
-        expect(ar_double).to have_received(:per).with('15')
-      end
+  context 'with email filtering param' do
+    let!(:people) do
+      [create(:person, email: 'test1@example.com'),
+       create(:person, email: 'test2@example.com')]
     end
 
-    context 'with invalid email address' do
-      it 'returns :bad_request with error'
+    it 'filters persons by email address' do
+      get '/api/v1/people', params: { email: 'test2@example.com' }
+
+      body = JSON.parse(response.body)
+      expect(response).to have_http_status(:ok)
+      expect(body.count).to eq(1)
+      expect(body[0]['email']).to eq('test2@example.com')
     end
   end
 end
