@@ -10,4 +10,8 @@
 
 class Company < ApplicationRecord
   has_many :people
+
+  def self.search_by_name(name)
+    self.where('name LIKE ?', '%' + self.sanitize_sql_like(name) + '%')
+  end
 end
