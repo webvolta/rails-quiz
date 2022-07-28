@@ -16,19 +16,18 @@ module Api
 
       def create
         if params[:companies]
-          attributes = companies_params[:companies]
+          @company = Company.create(companies_params[:companies])
+          @errors = @company.map { |e| e.errors.full_messages unless e.valid? }
         else
-          attributes = company_params
+          @company = Company.create(company_params)
+          @errors = @company.valid? ? [] : [@company.errors.full_messages]
         end
 
-        @company = Company.create(attributes)
-
-        if @company.valid?
-          render json: @company, status: :created
-        else
-          render json: @company.errors.full_messages,
-                 status: :unprocessable_entity
+        if @errors.any?
+          return render json: @errors, status: :unprocessable_entity
         end
+
+        render json: @company, status: :created
       end
 
       private

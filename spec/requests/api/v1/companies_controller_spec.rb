@@ -69,14 +69,23 @@ RSpec.describe Api::V1::CompaniesController do
     end
 
     context 'company unable to be saved' do
-      let(:payload) { { company: { name: nil } } }
+      let(:payload_single) { { company: { name: nil } } }
+      let(:payload_multiple) { { companies: [{ name: nil }] } }
 
-      it 'returns error' do
-        post '/api/v1/companies', params: payload, headers: headers
+      it 'returns error (single)' do
+        post '/api/v1/companies', params: payload_single, headers: headers
 
         body = JSON.parse(response.body)
         expect(response).to have_http_status(:unprocessable_entity)
-        expect(body[0]).to eq('Name can\'t be blank')
+        expect(body[0]).to eq(['Name can\'t be blank'])
+      end
+
+      it 'returns error (multiple)' do
+        post '/api/v1/companies', params: payload_multiple, headers: headers
+
+        body = JSON.parse(response.body)
+        expect(response).to have_http_status(:unprocessable_entity)
+        expect(body[0]).to eq(['Name can\'t be blank'])
       end
     end
   end
