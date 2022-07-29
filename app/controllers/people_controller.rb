@@ -16,6 +16,16 @@ class PeopleController < ApplicationController
     end
   end
 
+  ### PEOPLE API SECTION ###
+
+  #Get a list of people based off of filter. :email :page :per_page
+  def people_list
+    #Get a list of all people who have the email provided
+    @people = Person.where("email = ?", params[:email]).page(params[:page]).per(params[:per_page])
+
+    render json: @people
+  end
+
   private
 
   def person_attributes

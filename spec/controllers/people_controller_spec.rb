@@ -23,4 +23,24 @@ RSpec.describe PeopleController, type: :controller do
       expect(post :create, params: { person: { name: 'foo', phone_number: '123', email: 'foo' } }).to have_http_status(:found)
     end
   end
+
+  describe 'GET people_list' do
+    before do
+      Person.create(name: 'foo', phone_number: '123', email: 'foo@foo.com')
+      Person.create(name: 'foo2', phone_number: '123', email: 'foo2@foo.com')
+      Person.create(name: 'foo3', phone_number: '123', email: 'foo2@foo.com')
+    end
+
+    it 'Gets a list of people with email foo@foo.com, page, people per page' do
+      get :people_list, params: {email: 'foo@foo.com', page: 1, per_page: 10}
+      json_resp = JSON(response.body)
+      expect(json_resp.count).to eq(1)
+    end
+
+    it 'Gets a list of people with email foo2@foo.com, page, people per page' do
+      get :people_list, params: {email: 'foo2@foo.com', page: 1, per_page: 10}
+      json_resp = JSON(response.body)
+      expect(json_resp.count).to eq(2)
+    end
+  end
 end
