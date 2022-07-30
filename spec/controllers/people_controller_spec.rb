@@ -22,6 +22,11 @@ RSpec.describe PeopleController, type: :controller do
     it 'has status found' do
       expect(post :create, params: { person: { name: 'foo', phone_number: '123', email: 'foo' } }).to have_http_status(:found)
     end
+
+    it 'missing parameters raises an error' do
+      post :create, params:{ person: {name: nil, phone_number: nil, email: nil}}
+      expect(flash[:alert]).to match("Unsuccessfully created entry")
+    end
   end
 
   describe 'GET people_list' do

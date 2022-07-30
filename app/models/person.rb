@@ -12,6 +12,9 @@
 #
 
 class Person < ApplicationRecord
-  
+  validates :name, presence: true
+  validates :phone_number, presence: true
+  validates :email, presence: true
+
   belongs_to :company, optional: true
 end

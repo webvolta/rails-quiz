@@ -9,10 +9,10 @@ class PeopleController < ApplicationController
   end
 
   def create
-    if Person.create(person_attributes)
+    if Person.create(person_attributes).valid?
       redirect_to people_path, notice: 'Successfully created entry'
     else
-      render :create, alert: 'Unsuccessfully created entry'
+      redirect_to people_path, alert: 'Unsuccessfully created entry'
     end
   end
 
@@ -20,12 +20,14 @@ class PeopleController < ApplicationController
 
   #Get a list of people based off of filter. :email :page :per_page
   def people_list
-    #Get a list of all people who have the email provided
+    #Get a list of all people who have the email provided based on page, limited by per_page
     @people = Person.where("email = ?", params[:email]).page(params[:page]).per(params[:per_page])
 
     render json: @people
   end
 
+  ### END PEOPLE API SECTION ###
+  
   private
 
   def person_attributes
