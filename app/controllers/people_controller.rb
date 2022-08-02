@@ -1,7 +1,8 @@
 class PeopleController < ApplicationController
 
   def index
-    @people = Person.all
+    @people = Person.includes(:company).limit(100)
+
   end
 
   def new
