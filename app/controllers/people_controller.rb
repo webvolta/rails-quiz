@@ -1,7 +1,7 @@
 class PeopleController < ApplicationController
 
   def index
-    @people = Person.includes(:company).limit(100)
+    @people = Person.includes(:company).limit(100).page params[:page] #change limit to adjust total DB query size default @100
 
   end
 

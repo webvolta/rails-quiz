@@ -1,5 +1,7 @@
 h2 Viewing people
 
+=paginate(@people)
+
 table.table
   thead
     tr
@@ -16,6 +18,3 @@ table.table
         td= person.try(:phone)
         td= person.try(:email)
         td= person.try(:company).try(:name)
-
-
-
