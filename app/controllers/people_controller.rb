@@ -8,7 +8,15 @@ class PeopleController < ApplicationController
     @person = Person.new
   end
 
+
+
   def create
+    
+
+
+
+
+
     if Person.create(person_attributes)
       redirect_to people_path, notice: 'Successfully created entry'
     else

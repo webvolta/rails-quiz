@@ -10,7 +10,7 @@
 100.times do
   Person.create({
     name: Faker::Name.name,
-    phone_number: Faker::PhoneNumber.phone_number,
+    phone: Faker::PhoneNumber.phone,
     email: Faker::Internet.email,
     company: Company.create(name: Faker::Company.name)
   })
