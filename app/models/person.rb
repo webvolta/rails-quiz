@@ -13,6 +13,6 @@
 
 class Person < ApplicationRecord
   paginates_per 10
-  belongs_to :company, optional: true
+  has_and_belongs_to_many :company, optional: true
   validates :email, format: { with: URI::MailTo::EMAIL_REGEXP } 
 end
