@@ -9,8 +9,6 @@ class PeopleController < ApplicationController
     @person = Person.new
   end
 
-
-
   def create
 
     @person = Person.new(person_attributes)

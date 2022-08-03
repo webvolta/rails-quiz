@@ -1,4 +1,4 @@
-class Api::V1::CompanyController < ApplicationController
+class Api::V1::CompaniesController < ApplicationController
   def show
     company = company.find_by(name: params[:name]).page params[:page]
 
