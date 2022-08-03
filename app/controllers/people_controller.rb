@@ -15,8 +15,7 @@ class PeopleController < ApplicationController
 
     @person = Person.new(person_attributes)
 
-    if @person.email != @person.email_check
-
+    if @person.email != @person.email_check 
       redirect_to new_person_path, notice: 'Please double check your email!'
       return
     end
