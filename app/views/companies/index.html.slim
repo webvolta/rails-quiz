@@ -5,10 +5,13 @@ h2 Viewing companies
 table.table
   thead
     tr
-      th[scope="col"] Name
+      th[scope="col"] 
+      th[scope="col"] NAME 
+      th[scope="col"] EDIT
     tbody
     - @companies.each do |company|
       tr
         th[scope="row"]= company&.id
         td= company.try(:name)
+
 

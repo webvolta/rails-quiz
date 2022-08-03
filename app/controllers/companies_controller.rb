@@ -7,8 +7,8 @@ class CompaniesController < ApplicationController
     
       def new
         @company = Company.new
-      end      
-    
+      end  
+
       def create
     
         @company = Company.new(company_attributes)
@@ -18,6 +18,22 @@ class CompaniesController < ApplicationController
         else
           render :create, alert: 'Unsuccessfully created entry'
         end
+      end
+
+      def edit
+        @company = Company.find(params[:id])
+      end   
+
+      def update
+        @company = Company.find(params[:id])
+       
+      if @company.update(company_params)
+          redirect_to company_path
+          flash[:success] = "company updated!"
+        else
+          flash.now[:danger] = "Something went wrong"
+          render :edit
+        end    
       end
     
       private

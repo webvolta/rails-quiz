@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   end
 
   resources :people, only: [:index, :new, :create]
-  resources :companies, only: [:index, :new, :edit, :create]
+  resources :companies, only: [:index, :new, :edit, :create, :update]
   root to: 'people#index'
  
 end

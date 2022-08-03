@@ -1,0 +1,8 @@
+h2 Editing a company
+
+= form_for @company, class: 'row' do |f|
+  .col-auto
+    = f.label :name, class: 'form-label'
+    = f.text_field :name, class: 'form-control'
+  .col-auto.mt-4
+    = f.submit class: 'btn btn-primary'
