@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_01_17_214728) do
+ActiveRecord::Schema.define(version: 2022_08_14_042120) do
 
   create_table "companies", force: :cascade do |t|
     t.string "name"
@@ -26,6 +26,15 @@ ActiveRecord::Schema.define(version: 2022_01_17_214728) do
     t.datetime "updated_at", precision: 6, null: false
     t.integer "company_id"
     t.index ["company_id"], name: "index_people_on_company_id"
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string "name"
+    t.string "password"
+    t.string "email"
+    t.string "token"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   add_foreign_key "people", "companies"

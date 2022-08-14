@@ -1,0 +1,19 @@
+
+
+
+<%= form_with model: @user do |form| %>
+  <%= form.text_field :name %>
+  <%= form.text_area :password, size: "60x10" %>
+  <%= form.submit %>
+<% end %>
+
+<%= form_for(@user, url: 'signup') do |form| %>
+  <%# <#%= form.label :name, "Name:" %> %>
+  <%# <#%= form.text_field :name %> %>
+
+  <%# <#%= form.label :password, "Password:" %> %>
+  <%# <#%= form.text_field :password %> %>
+
+  <%= form.submit %>
+<% end %>
+
