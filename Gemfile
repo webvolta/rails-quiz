@@ -14,6 +14,9 @@ gem "jbuilder"
 gem "tzinfo-data", platforms: %i[ mingw mswin x64_mingw jruby ]
 gem 'slim-rails'
 gem "jsbundling-rails"
+gem 'kaminari'
+gem 'active_model_serializers'
+gem 'jwt'
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
