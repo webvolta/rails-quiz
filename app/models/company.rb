@@ -9,6 +9,8 @@
 #
 
 class Company < ApplicationRecord
+  validates :name, presence: true
+
   has_many :people
 
   scope :by_name_like, ->(name) {

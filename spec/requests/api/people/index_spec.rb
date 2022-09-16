@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe 'api/people', type: :request do
+describe 'GET api/people', type: :request do
   before do
     @people = FactoryBot.create_list(:person, 21)
     @people = @people.sort_by(&:name)

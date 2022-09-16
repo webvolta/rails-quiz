@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe 'api/companies', type: :request do
+describe 'GET api/companies', type: :request do
   before do
     @companies = FactoryBot.create_list(:company, 21)
     @companies = @companies.sort_by(&:name)

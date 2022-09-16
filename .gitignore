@@ -94,3 +94,6 @@ tags
 
 # Ignore ide settings
 /.idea
+
+# Ignore direnv file
+.envrc

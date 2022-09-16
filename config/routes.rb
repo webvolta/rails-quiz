@@ -4,7 +4,7 @@ Rails.application.routes.draw do
 
   namespace :api do
     resources :people, only: [:index]
-    resources :companies, only: [:index]
+    resources :companies, only: [:index, :create]
   end
 
   root to: 'people#index'
