@@ -91,3 +91,6 @@ Sessionx.vim
 tags
 # Persistent undo
 [._]*.un~
+
+# Ignore ide settings
+/.idea

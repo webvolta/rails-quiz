@@ -10,7 +10,7 @@ Please make your solutions to this application as if you're doing your every day
 
 ### Performance Issues
 2. Too many queries to the database, load Companies along with People.
-3. As a front-end user, when viewing more than 10 entries in the index, I will see them raginated (with Kaminari).
+3. As a front-end user, when viewing more than 10 entries in the index, I will see them paginated (with Kaminari).
 
 ### Issue User Stories
 4. As a front-end user, when creating a new Person entry, when the new entry is unable to be saved, I will see a message with the error, and it will keep the values in the fields I have already filled out. 
