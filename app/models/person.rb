@@ -12,6 +12,6 @@
 #
 
 class Person < ApplicationRecord
-  
+  validates :email, format: { with: /(.+)@(.+)/, message: "Email invalid"  }
   belongs_to :company, optional: true
 end

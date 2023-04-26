@@ -16,6 +16,6 @@ table.table
         td= person.try(:phone_number)
         td= person.try(:email)
         td= person.try(:company).try(:name)
-
+= paginate(@people)
 
 
