@@ -115,6 +115,18 @@ GEM
       activesupport (>= 5.0.0)
     jsbundling-rails (1.0.0)
       railties (>= 6.0.0)
+    kaminari (1.2.2)
+      activesupport (>= 4.1.0)
+      kaminari-actionview (= 1.2.2)
+      kaminari-activerecord (= 1.2.2)
+      kaminari-core (= 1.2.2)
+    kaminari-actionview (1.2.2)
+      actionview
+      kaminari-core (= 1.2.2)
+    kaminari-activerecord (1.2.2)
+      activerecord
+      kaminari-core (= 1.2.2)
+    kaminari-core (1.2.2)
     loofah (2.13.0)
       crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
@@ -141,6 +153,8 @@ GEM
       net-protocol
       timeout
     nio4r (2.5.8)
+    nokogiri (1.13.1-x86_64-darwin)
+      racc (~> 1.4)
     nokogiri (1.13.1-x86_64-linux)
       racc (~> 1.4)
     pry (0.14.1)
@@ -268,6 +282,7 @@ GEM
     zeitwerk (2.5.3)
 
 PLATFORMS
+  x86_64-darwin-21
   x86_64-linux
 
 DEPENDENCIES
@@ -279,6 +294,7 @@ DEPENDENCIES
   faker
   jbuilder
   jsbundling-rails
+  kaminari
   pry-rails
   puma (~> 5.0)
   rails (~> 7.0.1)

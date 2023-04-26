@@ -1,7 +1,7 @@
 class PeopleController < ApplicationController
 
   def index
-    @people = Person.all
+    @people = Person.page(params[:page]).per(10)
   end
 
   def new
@@ -9,6 +9,7 @@ class PeopleController < ApplicationController
   end
 
   def create
+
     if Person.create(person_attributes)
       redirect_to people_path, notice: 'Successfully created entry'
     else
@@ -19,7 +20,7 @@ class PeopleController < ApplicationController
   private
 
   def person_attributes
-    params.require(:person).permit(:name, :email, :phone)
+    params.require(:person).permit(:name, :email, :phone_number)
   end
 
 end
