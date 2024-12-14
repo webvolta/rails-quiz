@@ -13,9 +13,11 @@ table.table
       tr
         th[scope="row"]= person&.id
         td= person.try(:name)
-        td= person.try(:phone)
+        td= person.try(:phone_number)
         td= person.try(:email)
         td= person.try(:company).try(:name)
 
+= paginate @people, theme: 'bootstrap3'
+= page_entries_info @people
 
 
