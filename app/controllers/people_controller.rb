@@ -9,10 +9,12 @@ class PeopleController < ApplicationController
   end
 
   def create
-    if Person.create(person_attributes)
+    @person = Person.new(person_attributes)
+
+    if @person.save
       redirect_to people_path, notice: 'Successfully created entry'
     else
-      render :create, alert: 'Unsuccessfully created entry'
+      render :new, status: :unprocessable_entity
     end
   end
 
@@ -21,6 +23,5 @@ class PeopleController < ApplicationController
   def person_attributes
     params.require(:person).permit(:name, :email, :phone_number)
   end
-
 end
 
