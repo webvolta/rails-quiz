@@ -19,6 +19,8 @@ html[lang="en"]
               a.nav-link[aria-current="page" href="/"]All
             li.nav-item
               = link_to('Create', new_person_path, class: 'nav-link')
+            li.nav-item
+              = link_to('Companies', companies_path, class: 'nav-link')
           form.d-flex
             input.form-control.me-2[type="search" placeholder="Search" aria-label="Search"]
             button.btn.btn-outline-success[type="submit"] Search
