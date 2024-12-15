@@ -1,0 +1,25 @@
+h2 Viewing companies
+
+table.table
+  thead
+    tr
+      th[scope="col"] ID
+      th[scope="col"] Name
+      th[scope="col"] Created At
+      th[scope="col"] Actions
+  tbody
+    - @companies.each do |company|
+      tr
+        th[scope="row"]= company&.id
+        td= company.try(:name)
+        td= company.try(:created_at).strftime("%m/%d/%Y")
+        td= link_to "Edit", edit_company_path(company), class: 'btn btn-primary'
+
+.row.justify-content-between
+  .col-4
+    = paginate @companies, theme: 'bootstrap3'
+    = page_entries_info @companies
+  .col-4
+    = link_to "New Company", new_company_path, class: 'btn btn-success'
+
+
