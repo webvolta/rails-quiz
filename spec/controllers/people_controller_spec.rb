@@ -57,12 +57,34 @@ RSpec.describe PeopleController, type: :controller do
   end
 
   describe 'POST create' do
-    it 'Creates a record' do
-      expect{ post :create, params: { person: { name: 'foo', phone_number: '123', email: 'foo' } } }.to change{ Person.count }.by(1)
+    let!(:company) { FactoryBot.create(:company) }
+
+    context 'with valid attributes' do
+      it 'creates a record' do
+        expect {
+          post :create, params: { person: { name: 'foo', phone_number: '123', email: 'foo@example.com', company_id: company.id } }
+        }.to change { Person.count }.by(1)
+      end
+
+      it 'associates the person with the correct company' do
+        post :create, params: { person: { name: 'foo', phone_number: '123', email: 'foo@example.com', company_id: company.id } }
+        person = Person.last
+        expect(person.company).to eq(company)
+      end
+
+      it 'redirects to the index with a success notice' do
+        post :create, params: { person: { name: 'foo', phone_number: '123', email: 'foo@example.com', company_id: company.id } }
+        expect(response).to redirect_to(people_path)
+        expect(flash[:notice]).to eq('Person successfully created')
+      end
     end
 
-    it 'has status found' do
-      expect(post :create, params: { person: { name: 'foo', phone_number: '123', email: 'foo' } }).to have_http_status(:found)
+    context 'with invalid attributes' do
+      it 'does not create a record' do
+        expect {
+          post :create, params: { person: { name: '', phone_number: '', email: '', company_id: nil } }
+        }.not_to change { Person.count }
+      end
     end
   end
 end
