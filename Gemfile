@@ -14,12 +14,15 @@ gem "jbuilder"
 gem "tzinfo-data", platforms: %i[ mingw mswin x64_mingw jruby ]
 gem 'slim-rails'
 gem "jsbundling-rails"
+gem 'kaminari'
+gem 'active_model_serializers'
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "debug", platforms: %i[ mri mingw x64_mingw ]
   gem "rspec-rails"
   gem "pry-rails"
+  gem "factory_bot_rails"
 end
 
 group :development do
@@ -37,6 +40,7 @@ group :test do
   gem "rspec-its"
   gem "shoulda"
   gem "simplecov", require: false
+  gem "rails-controller-testing"
 end
 
 # Use Redis for Action Cable

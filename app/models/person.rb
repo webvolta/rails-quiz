@@ -12,6 +12,7 @@
 #
 
 class Person < ApplicationRecord
-  
   belongs_to :company, optional: true
+
+  validates :name, :phone_number, :email, presence: true
 end
