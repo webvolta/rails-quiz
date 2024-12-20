@@ -2,7 +2,8 @@ require 'rails_helper'
 
 RSpec.describe 'Listing people', type: :feature do
   before do 
-    Person.create(
+    FactoryBot.create(
+      :person,
       name: 'Foo Bar',
       phone_number: 'Biz',
       email: 'Baz'

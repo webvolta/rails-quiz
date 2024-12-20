@@ -1,7 +1,7 @@
 class PeopleController < ApplicationController
 
   def index
-    @people = Person.all
+    @people = Person.includes(:company)
   end
 
   def new
@@ -9,17 +9,18 @@ class PeopleController < ApplicationController
   end
 
   def create
-    if Person.create(person_attributes)
+    @person = Person.new(person_attributes)
+    if @person.save
       redirect_to people_path, notice: 'Successfully created entry'
     else
-      render :create, alert: 'Unsuccessfully created entry'
+      render :new, alert: 'Unsuccessfully created entry', status: :unprocessable_entity
     end
   end
 
   private
 
   def person_attributes
-    params.require(:person).permit(:name, :email, :phone)
+    params.require(:person).permit(:name, :email, :phone_number)
   end
 
 end
