@@ -2,10 +2,10 @@ require "rails_helper"
 
 describe "people/index.html.slim" do
   let(:company) { FactoryBot.create(:company, name: "Default Company") }
-  let(:first_person) { FactoryBot.create(:person, phone_number: "Foo", company: company) }
-  let(:second_person) { FactoryBot.create(:person, name: "Jane Doe", email: "jane@doe.com.br", phone_number: "Bar", company: company) }
+  let!(:first_person) { FactoryBot.create(:person, phone_number: "Foo", company: company) }
+  let!(:second_person) { FactoryBot.create(:person, name: "Jane Doe", email: "jane@doe.com.br", phone_number: "Bar", company: company) }
   it "Displays the users" do
-    assign(:people, [first_person, second_person])
+    assign(:people, People::List.new(page: 1).execute)
     render
 
     expect(rendered).to match(/John/)            # name (John)

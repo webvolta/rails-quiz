@@ -1,7 +1,8 @@
 class PeopleController < ApplicationController
-
   def index
-    @people = Person.all
+    page = params[:page].to_i
+    page = 1 if page == 0
+    @people = People::List.new(page: page).execute
   end
 
   def new
@@ -22,6 +23,4 @@ class PeopleController < ApplicationController
   def person_attributes
     params.require(:person).permit(:name, :email, :phone_number)
   end
-
 end
-
