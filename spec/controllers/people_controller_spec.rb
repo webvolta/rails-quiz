@@ -22,5 +22,9 @@ RSpec.describe PeopleController, type: :controller do
     it 'has status found' do
       expect(post :create, params: { person: { name: 'foo', phone_number: '123', email: 'foo' } }).to have_http_status(:found)
     end
+
+    it 'doesn\'t create a user when is missing phone_number' do
+      expect(post :create, params: { person: { name: 'foo', email: 'foo' } }).to have_http_status(:unprocessable_entity)
+    end
   end
 end
