@@ -1,9 +1,9 @@
 require "rails_helper"
 
 describe "people/index.html.slim" do
-  let(:company) { Company.create(name: "Default Company") }
-  let(:first_person) { Person.create(name: "John Doe", email: "john@doe.com.br", phone_number: "Foo", company: company) }
-  let(:second_person) { Person.create(name: "Jane Doe", email: "jane@doe.com.br", phone_number: "Bar", company: company) }
+  let(:company) { FactoryBot.create(:company, name: "Default Company") }
+  let(:first_person) { FactoryBot.create(:person, phone_number: "Foo", company: company) }
+  let(:second_person) { FactoryBot.create(:person, name: "Jane Doe", email: "jane@doe.com.br", phone_number: "Bar", company: company) }
   it "Displays the users" do
     assign(:people, [first_person, second_person])
     render
